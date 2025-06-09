@@ -6,7 +6,7 @@ import requests
 @app.route("/")
 def home():
     import requests
-    api_url = "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=51.0149&longitude=-3.1029&start_date=2022-12-20&end_date=2022-12-31&hourly=temperature_2m,rain"  # Replace with your API URL
+    api_url = "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&start_date=2025-03-01&end_date=2025-04-01&hourly=temperature_2m,rain" 
     response = requests.get(api_url)
     data = response.json()  # Adjust as needed for your API's response
     return render_template('home.html', api_data=data)
