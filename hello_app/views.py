@@ -5,6 +5,16 @@ import requests
 
 from flask import request
 
+def structure_daily_data(data):
+    daily = data['daily']
+    keys = daily.keys()
+    num_days = len(daily['time'])
+    structured = [
+        {key: daily[key][i] for key in keys}
+        for i in range(num_days)
+    ]
+    return structured
+
 @app.route("/", methods=["GET"])
 def home():
     latitude = request.args.get("latitude", "52.52")
@@ -15,11 +25,12 @@ def home():
         f"https://historical-forecast-api.open-meteo.com/v1/forecast"
         f"?latitude={latitude}&longitude={longitude}"
         f"&start_date={start_date}&end_date={end_date}"
-        f"&hourly=temperature_2m,rain"
+        f"&daily=temperature_2m_max,temperature_2m_min,wind_speed_10m_max,rain_sum"
     )
     response = requests.get(api_url)
     data = response.json()
-    return render_template('home.html', api_data=data)
+    daily_data = structure_daily_data(data)
+    return render_template('home.html', api_data=daily_data)
     
 
 @app.route("/about/")

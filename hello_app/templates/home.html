@@ -20,23 +20,27 @@ Home
   <button type="submit">Get Weather</button>
 </form>
 
-{% if api_data and api_data.hourly %}
+{% if api_data %}
     <div>
-        <h3>Hourly Weather Data</h3>
+        <h3>Daily Weather Data</h3>
         <table border="1" style="border-collapse:collapse;max-width:100%;">
             <thead>
                 <tr>
-                    <th>Time ({{ api_data.hourly_units.time }})</th>
-                    <th>Rain ({{ api_data.hourly_units.rain }})</th>
-                    <th>Temperature ({{ api_data.hourly_units.temperature_2m }})</th>
+                    <th>Date</th>
+                    <th>Max Temp (°C)</th>
+                    <th>Min Temp (°C)</th>
+                    <th>Max Wind Speed (km/h)</th>
+                    <th>Rain (mm)</th>
                 </tr>
             </thead>
             <tbody>
-                {% for i in range(api_data.hourly.time|length) %}
+                {% for day in api_data %}
                     <tr>
-                        <td>{{ api_data.hourly.time[i] }}</td>
-                        <td>{{ api_data.hourly.rain[i] }}</td>
-                        <td>{{ api_data.hourly.temperature_2m[i] }}</td>
+                        <td>{{ day.time }}</td>
+                        <td>{{ day.temperature_2m_max }}</td>
+                        <td>{{ day.temperature_2m_min }}</td>
+                        <td>{{ day.wind_speed_10m_max }}</td>
+                        <td>{{ day.rain_sum }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
