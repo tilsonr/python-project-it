@@ -11,4 +11,13 @@ Home
     <li>Wind Speed/Direction</li>
 </ul>
 <img src="https://t4.ftcdn.net/jpg/05/76/50/59/360_F_576505936_VLdEYvjSBYgs1EkweYeGqBPgbxHFuenC.jpg" alt="Sample" style="max-width:100%;height:auto;margin-top:16px;">
+
+
+{% if api_data %}
+    <div>
+        <h3>API Result:</h3>
+        <pre>{{ api_data | tojson(indent=2) }}</pre>
+    </div>
+{% endif %}
+ 
 {% endblock %}
