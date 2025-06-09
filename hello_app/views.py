@@ -17,8 +17,8 @@ def structure_daily_data(data):
 
 @app.route("/", methods=["GET"])
 def home():
-    latitude = request.args.get("latitude", "52.52")
-    longitude = request.args.get("longitude", "13.41")
+    latitude = request.args.get("latitude", "51.5")
+    longitude = request.args.get("longitude", "-0.12")
     start_date = request.args.get("start_date", "2025-03-01")
     end_date = request.args.get("end_date", "2025-04-01")
     api_url = (

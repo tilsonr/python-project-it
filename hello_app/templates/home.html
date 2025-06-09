@@ -3,7 +3,7 @@
 Home
 {% endblock %}
 {% block content %}
-<h1>UK Weather History Tracker</h1>
+<h1>Weather History Tracker</h1>
 </p>Welcome to the UK Weather History Tracker. This website allows you to view historical weather data from across the UK based on:</p>
 <ul>
     <li>Rainfall</li>
@@ -13,10 +13,10 @@ Home
 <img src="https://t4.ftcdn.net/jpg/05/76/50/59/360_F_576505936_VLdEYvjSBYgs1EkweYeGqBPgbxHFuenC.jpg" alt="Sample" style="max-width:100%;height:auto;margin-top:16px;">
 
 <form method="get" action="/">
-  <label>Latitude: <input type="text" name="latitude" value="52.52"></label>
-  <label>Longitude: <input type="text" name="longitude" value="13.41"></label>
-  <label>Start Date: <input type="date" name="start_date" value="2025-03-01"></label>
-  <label>End Date: <input type="date" name="end_date" value="2025-04-01"></label>
+  <label>Latitude: <input type="text" name="latitude" value="{{ request.args.get('latitude', '51.5') }}"></label>
+  <label>Longitude: <input type="text" name="longitude" value="{{ request.args.get('longitude', '-0.12') }}"></label>
+  <label>Start Date: <input type="date" name="start_date" value="{{ request.args.get('start_date', '2025-03-01') }}"></label>
+  <label>End Date: <input type="date" name="end_date" value="{{ request.args.get('end_date', '2025-04-01') }}"></label>
   <button type="submit">Get Weather</button>
 </form>
 
