@@ -13,11 +13,27 @@ Home
 <img src="https://t4.ftcdn.net/jpg/05/76/50/59/360_F_576505936_VLdEYvjSBYgs1EkweYeGqBPgbxHFuenC.jpg" alt="Sample" style="max-width:100%;height:auto;margin-top:16px;">
 
 
-{% if api_data %}
+{% if api_data and api_data.hourly %}
     <div>
-        <h3>API Result:</h3>
-        <pre>{{ api_data | tojson(indent=2) }}</pre>
-        
+        <h3>Hourly Weather Data</h3>
+        <table border="1" style="border-collapse:collapse;max-width:100%;">
+            <thead>
+                <tr>
+                    <th>Time ({{ api_data.hourly_units.time }})</th>
+                    <th>Rain ({{ api_data.hourly_units.rain }})</th>
+                    <th>Temperature ({{ api_data.hourly_units.temperature_2m }})</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(api_data.hourly.time|length) %}
+                    <tr>
+                        <td>{{ api_data.hourly.time[i] }}</td>
+                        <td>{{ api_data.hourly.rain[i] }}</td>
+                        <td>{{ api_data.hourly.temperature_2m[i] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endif %}
 
