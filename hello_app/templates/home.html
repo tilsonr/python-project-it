@@ -12,6 +12,13 @@ Home
 </ul>
 <img src="https://t4.ftcdn.net/jpg/05/76/50/59/360_F_576505936_VLdEYvjSBYgs1EkweYeGqBPgbxHFuenC.jpg" alt="Sample" style="max-width:100%;height:auto;margin-top:16px;">
 
+<form method="get" action="/">
+  <label>Latitude: <input type="text" name="latitude" value="52.52"></label>
+  <label>Longitude: <input type="text" name="longitude" value="13.41"></label>
+  <label>Start Date: <input type="date" name="start_date" value="2025-03-01"></label>
+  <label>End Date: <input type="date" name="end_date" value="2025-04-01"></label>
+  <button type="submit">Get Weather</button>
+</form>
 
 {% if api_data and api_data.hourly %}
     <div>

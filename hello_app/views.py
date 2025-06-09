@@ -3,12 +3,22 @@ from flask import Flask, render_template
 from . import app
 import requests
 
-@app.route("/")
+from flask import request
+
+@app.route("/", methods=["GET"])
 def home():
-    import requests
-    api_url = "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&start_date=2025-03-01&end_date=2025-04-01&hourly=temperature_2m,rain" 
+    latitude = request.args.get("latitude", "52.52")
+    longitude = request.args.get("longitude", "13.41")
+    start_date = request.args.get("start_date", "2025-03-01")
+    end_date = request.args.get("end_date", "2025-04-01")
+    api_url = (
+        f"https://historical-forecast-api.open-meteo.com/v1/forecast"
+        f"?latitude={latitude}&longitude={longitude}"
+        f"&start_date={start_date}&end_date={end_date}"
+        f"&hourly=temperature_2m,rain"
+    )
     response = requests.get(api_url)
-    data = response.json()  # Adjust as needed for your API's response
+    data = response.json()
     return render_template('home.html', api_data=data)
     
 
