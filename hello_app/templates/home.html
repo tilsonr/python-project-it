@@ -32,6 +32,8 @@ Home
                     <th>Min Temp (°C)</th>
                     <th>Max Wind Speed (km/h)</th>
                     <th>Rain (mm)</th>
+                    <th>Sunrise</th>
+                    <th>Sunset</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +44,9 @@ Home
                         <td>{{ day.temperature_2m_min }}</td>
                         <td>{{ day.wind_speed_10m_max }}</td>
                         <td>{{ day.rain_sum }}</td>
+                        <td>{{ day.sunrise }}</td>
+                        <td>{{ day.sunset }}</td>
+                        
                     </tr>
                 {% endfor %}
             </tbody>

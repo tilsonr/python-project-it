@@ -25,7 +25,7 @@ def home():
         f"https://historical-forecast-api.open-meteo.com/v1/forecast"
         f"?latitude={latitude}&longitude={longitude}"
         f"&start_date={start_date}&end_date={end_date}"
-        f"&daily=temperature_2m_max,temperature_2m_min,wind_speed_10m_max,rain_sum"
+        f"&daily=temperature_2m_max,temperature_2m_min,wind_speed_10m_max,rain_sum,sunrise,sunset"
     )
     response = requests.get(api_url)
     data = response.json()
