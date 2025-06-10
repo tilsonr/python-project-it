@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 {% block title %}
-Home
+Weather History Tracker - Homepage
 {% endblock %}
 {% block content %}
+
 <h1>Weather History Tracker</h1>
 </p>Welcome to the UK Weather History Tracker. This website allows you to view historical weather data from across the UK based on:</p>
 <ul>
@@ -11,7 +12,14 @@ Home
     <li>Wind Speed</li>
     <li>Sunrise and sunset</li>
 </ul>
-<img src="https://t4.ftcdn.net/jpg/05/76/50/59/360_F_576505936_VLdEYvjSBYgs1EkweYeGqBPgbxHFuenC.jpg" alt="Sample" style="max-width:100%;height:auto;margin-top:16px;">
+<style>
+    body {
+        background-image: url('https://t4.ftcdn.net/jpg/05/76/50/59/360_F_576505936_VLdEYvjSBYgs1EkweYeGqBPgbxHFuenC.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+</style>
 
 <form method="get" action="/">
   <label>Latitude: <input type="text" name="latitude" value="{{ request.args.get('latitude', '51.5') }}"></label>
