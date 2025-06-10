@@ -61,8 +61,8 @@ body {
                             <td>{{ day.temperature_2m_min }}</td>
                             <td>{{ day.wind_speed_10m_max }}</td>
                             <td>{{ day.rain_sum }}</td>
-                            <td>{{ day.sunrise }}</td>
-                            <td>{{ day.sunset }}</td>
+                            <td>{{ day.sunrise.split('T')[1][:5] if day.sunrise and 'T' in day.sunrise else day.sunrise[:5].replace(':', '/') if day.sunrise }}</td>
+                            <td>{{ day.sunset.split('T')[1][:5] if day.sunset and 'T' in day.sunset else day.sunset[:5].replace(':', '/') if day.sunset }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
