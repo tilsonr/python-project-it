@@ -15,10 +15,20 @@ def structure_daily_data(data):
     ]
     return structured
 
+def get_lat_lon(city):
+    geo_url = f"https://geocoding-api.open-meteo.com/v1/search?name={city}"
+    geo_response = requests.get(geo_url)
+    geo_data = geo_response.json()
+    if geo_data.get('results'):
+        lat = geo_data['results'][0]['latitude']
+        lon = geo_data['results'][0]['longitude']
+        return lat, lon
+    return 51.5, -0.12
+
 @app.route("/", methods=["GET"])
 def home():
-    latitude = request.args.get("latitude", "51.5")
-    longitude = request.args.get("longitude", "-0.12")
+    city=request.args.get("city","London")
+    latitude, longitude = get_lat_lon(city)
     start_date = request.args.get("start_date", "2025-03-01")
     end_date = request.args.get("end_date", "2025-04-01")
     api_url = (
