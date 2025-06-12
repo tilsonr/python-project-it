@@ -29,14 +29,49 @@ body {
       <input type="text" class="form-control small" id="fullNameInput" placeholder="John Smith" required>
       <div id="nameHelp" class="form-text small">Full name required*</div>
       <br>
+      <label class="form-label">Gender:</label>
+      <br>
+      <div class="btn-group" role="group" aria-label="Gender:" id="genderRadioGroup">
+    <input type="radio" class="btn-check" name="gender" id="btnradio1" autocomplete="off" value="male" required>
+    <label class="btn btn-outline-primary" for="btnradio1">Male</label>
+
+    <input type="radio" class="btn-check" name="gender" id="btnradio2" autocomplete="off" value="female" required>
+    <label class="btn btn-outline-primary" for="btnradio2">Female</label>
+
+    <input type="radio" class="btn-check" name="gender" id="btnradio3" autocomplete="off" value="other" required>
+    <label class="btn btn-outline-primary" for="btnradio3">Other/Prefer not to say</label>
+  </div>
+  <div class="invalid-feedback d-block" id="genderInvalid" style="display:none;">Please select a gender.</div>
+  <br>
+  <br>
       <label for="emailInput" class="form-label">Email address</label>
       <input type="email" class="form-control small" id="emailInput" placeholder="something@place.com" required>
       <div id="emailHelp" class="form-text small">We'll never share your email with anyone else.</div>
       <br>
-      <label for="exampleInputMessage" class="form-label">Message</label>
+      <label for="messageInput" class="form-label">Message</label>
       <textarea class="form-control small" id="messageInput" rows="5" placeholder="Your message here..." required></textarea>
       <div id="messageHelp" class="form-text small">Please give us your feedback!</div>
       <br>
+      <label for="ratingSelect" class="form-label">Rate this site</label>
+  <select class="form-select" id="ratingSelect" required>
+    <option value="" selected disabled>Choose a rating</option>
+    <option value="5">5⭐</option>
+    <option value="4">4⭐</option>
+    <option value="3">3⭐</option>
+    <option value="2">2⭐</option>
+    <option value="1">1⭐</option>
+  </select>
+  <div class="invalid-feedback">Please select a rating.</div>
+  <br>
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" value="" id="consentCheckbox" required>
+    <label class="form-check-label" for="consentCheckbox">
+        I consent to the Weather History Tracker terms of service
+    </label>
+    <div class="invalid-feedback">
+        You must consent before submitting.
+    </div>
+  </div>
       <button class="btn btn-primary" type="submit">Send Message</button>
     </form>
     <div class="toast position-fixed bottom-0 end-0 m-3" id="invalidToast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4000">
@@ -47,7 +82,9 @@ body {
       <div class="toast-body">
         One or more fields are invalid. Please check your input.
       </div>
+    
     </div>
+    
     <script>
     (function () {
       'use strict';
@@ -61,12 +98,30 @@ body {
       }
       Array.prototype.slice.call(forms).forEach(function (form) {
         form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-            if (toast) toast.show();
-          }
-          form.classList.add('was-validated');
+          var genderRadios = form.querySelectorAll('input[name="gender"]');
+      var genderSelected = Array.prototype.slice.call(genderRadios).some(function(radio) { return radio.checked; });
+      var genderInvalid = document.getElementById('genderInvalid');
+      if (!genderSelected) {
+        genderInvalid.style.display = 'block';
+      } else {
+        genderInvalid.style.display = 'none';
+      }
+      var ratingSelect = form.querySelector('#ratingSelect');
+      var ratingValid = ratingSelect && ratingSelect.value !== '';
+      if (!form.checkValidity() || !genderSelected || !ratingValid) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (toast) toast.show();
+        if (!ratingValid) {
+          ratingSelect.classList.add('is-invalid');
+        } else {
+          ratingSelect.classList.remove('is-invalid');
+        }
+      } else {
+        ratingSelect.classList.remove('is-invalid');
+        genderInvalid.style.display = 'none';
+      }
+      form.classList.add('was-validated');
         }, false);
       });
     })();
