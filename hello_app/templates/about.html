@@ -3,5 +3,32 @@
 Weather History Tracker- About Us
 {% endblock %}
 {% block content %}
-<p>About page for the Visual Studio Code Flask tutorial. Updated</p> 
+<style>
+body {
+    background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.about-container {
+    background: rgba(158, 152, 152, 0.95);
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    margin-top: 64px;
+}
+</style>
+<div class="about-container">
+    <h1>About Weather History Tracker</h1>
+    <p>The Weather History Tracker is a free web application designed to provide users with easy access to historical weather data based on:</p>
+    <ul>
+        <li>Rainfall</li>
+        <li>Temperature</li>
+        <li>Wind Speed</li>
+        <li>Sunrise and sunset</li>
+    </ul>
+    <p>Data is taken from <a href="https://open-meteo.com/en/docs/historical-forecast-api" target="_blank" rel="noopener">https://open-meteo.com/en/docs/historical-forecast-api</a>, a free source of weather data.</p>
+</div>
 {% endblock %}

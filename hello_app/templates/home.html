@@ -37,13 +37,6 @@ body {
 
 <div class="container">
     <h1 class="header-highlight text-center w-100">Weather History Tracker</h1>
-    </p>Welcome to the Weather History Tracker. This website allows you to easily view historical weather data based on:</p>
-    <ul>
-        <li>Rainfall</li>
-        <li>Temperature</li>
-        <li>Wind Speed</li>
-        <li>Sunrise and sunset</li>
-    </ul>
     <form method="get" action="/">
       <label>City: <input type="text" name="city" value="{{request.args.get('city','London')}}"</label>
       <label>Start Date: <input type="date" name="start_date" value="{{ request.args.get('start_date', '2025-03-01') }}"></label>
