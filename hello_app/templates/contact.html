@@ -24,18 +24,36 @@ body {
 <div class="container">
     <h1 class="text-center">Contact Us</h1>
     <p class="text-center">If you have any questions about this website, please reach out to us using the form below or at fakeemail@gmail.com</p>
-    <form class="form-floating">
+    <form class="needs-validation" novalidate>
       <label for="fullNameInput" class="form-label">Full Name</label>
-      <input type="Name" class="form-control small" id="fullNameInput" placeholder="Full name required*">
+      <input type="text" class="form-control small" id="fullNameInput" placeholder="Full name required*" required>
       <div id="nameHelp" class="form-text small">Please enter your full name</div>
+      <br>
+      <label for="emailInput" class="form-label">Email address</label>
+      <input type="email" class="form-control small" id="emailInput" placeholder="Valid email required*" required>
+      <div id="emailHelp" class="form-text small">We'll never share your email with anyone else.</div>
+      <br>
+      <label for="exampleInputMessage" class="form-label">Message</label>
+      <textarea class="form-control small" id="messageInput" rows="5" placeholder="Your message here..." required></textarea>
+      <div id="messageHelp" class="form-text small">Please give us your feedback!</div>
+      <br>
+      <button class="btn btn-primary" type="submit">Send Message</button>
     </form>
-    <br>
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control small" id="emailInput" placeholder="Valid email required*">
-    <div id="emailHelp" class="form-text small">We'll never share your email with anyone else.</div>
-    <br>
-    <label for="exampleInputMessage" class="form-label">Message</label>
-    <textarea class="form-control small" id="messageInput" rows="5" placeholder="Your message here..."></textarea>
-    <div id="messageHelp" class="form-text small">Please give us your feedback!</div>
+    <script>
+    // Bootstrap validation
+    (function () {
+      'use strict';
+      var forms = document.querySelectorAll('.needs-validation');
+      Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+    </script>
 </div>
 {% endblock %}
