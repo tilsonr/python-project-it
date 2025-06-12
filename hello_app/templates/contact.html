@@ -39,16 +39,32 @@ body {
       <br>
       <button class="btn btn-primary" type="submit">Send Message</button>
     </form>
+    <div class="toast position-fixed bottom-0 end-0 m-3" id="invalidToast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="4000">
+      <div class="toast-header">
+        <strong class="me-auto">Form Error</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        One or more fields are invalid. Please check your input.
+      </div>
+    </div>
     <script>
-    // Bootstrap validation
     (function () {
       'use strict';
       var forms = document.querySelectorAll('.needs-validation');
+      var toastEl = document.getElementById('invalidToast');
+      var toast;
+      if (window.bootstrap && window.bootstrap.Toast) {
+        toast = new bootstrap.Toast(toastEl);
+      } else if (window.Toast) {
+        toast = new Toast(toastEl);
+      }
       Array.prototype.slice.call(forms).forEach(function (form) {
         form.addEventListener('submit', function (event) {
           if (!form.checkValidity()) {
             event.preventDefault();
             event.stopPropagation();
+            if (toast) toast.show();
           }
           form.classList.add('was-validated');
         }, false);
