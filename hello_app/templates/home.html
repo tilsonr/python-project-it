@@ -38,7 +38,7 @@ body {
 <div class="container">
     <h1 class="header-highlight text-center w-100">Weather History Tracker</h1>
     <form method="get" action="/">
-      <label>City: <input type="text" name="city" value="{{request.args.get('city','London')}}"</label>
+      <label>City: <input type="text" name="city" value="{{request.args.get('city','London')}}"></label>
       <label>Start Date: <input type="date" name="start_date" value="{{ request.args.get('start_date', '2025-03-01') }}"></label>
       <label>End Date: <input type="date" name="end_date" value="{{ request.args.get('end_date', '2025-04-01') }}"></label>
       <button type="submit">Get Weather</button>
