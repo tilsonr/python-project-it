@@ -22,13 +22,13 @@ def get_lat_lon(city):
     if geo_data.get('results'):
         lat = geo_data['results'][0]['latitude']
         lon = geo_data['results'][0]['longitude']
-        return lat, lon
-    return 51.5, -0.12
+        return lat, lon, False  
+    return 51.5, -0.12, True  
 
 @app.route("/", methods=["GET"])
 def home():
-    city=request.args.get("city","London")
-    latitude, longitude = get_lat_lon(city)
+    city = request.args.get("city", "London")
+    latitude, longitude, city_not_found = get_lat_lon(city)
     start_date = request.args.get("start_date", "2025-03-01")
     end_date = request.args.get("end_date", "2025-04-01")
     api_url = (
@@ -40,7 +40,7 @@ def home():
     response = requests.get(api_url)
     data = response.json()
     daily_data = structure_daily_data(data)
-    return render_template('home.html', api_data=daily_data)
+    return render_template('home.html', api_data=daily_data, city_not_found=city_not_found)
     
 
 @app.route("/about/")
