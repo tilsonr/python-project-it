@@ -95,6 +95,51 @@ body {
                 </tbody>
             </table>
         </div>
+        <div class="my-4">
+            <h3 class="text-center">Temperature Graph</h3>
+            <canvas id="weatherChart" height="100"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script type="application/json" id="weather-labels">{{ api_data|map(attribute='time')|list|tojson }}</script>
+        <script type="application/json" id="temp-max">{{ api_data|map(attribute='temperature_2m_max')|list|tojson }}</script>
+        <script type="application/json" id="temp-min">{{ api_data|map(attribute='temperature_2m_min')|list|tojson }}</script>
+        <script>
+            var weatherLabels = JSON.parse(document.getElementById('weather-labels').textContent);
+            var tempMax = JSON.parse(document.getElementById('temp-max').textContent);
+            var tempMin = JSON.parse(document.getElementById('temp-min').textContent);
+            var ctx = document.getElementById('weatherChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: weatherLabels,
+                    datasets: [
+                        {
+                            label: 'Max Temp (°C)',
+                            data: tempMax,
+                            borderColor: 'rgba(255,99,132,1)',
+                            backgroundColor: 'rgba(255,99,132,0.2)',
+                            fill: false,
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Min Temp (°C)',
+                            data: tempMin,
+                            borderColor: 'rgba(54,162,235,1)',
+                            backgroundColor: 'rgba(54,162,235,0.2)',
+                            fill: false,
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' },
+                        title: { display: true, text: 'Daily Temperatures' }
+                    }
+                }
+            });
+        </script>
     {% endif %}
 </div>
 
